@@ -31,3 +31,6 @@ module "api_gateway" {
 * `ports` - The ports that the services are running on.
 * _Note:_ `path_parts`, `ports` and `http_methods` need to be defined in the same order due to the iteration. E.g "products" runs on port 3001 and uses "GET" method. There must be the same number of elements in each list as defined in `service_count`.
 * The `method_settings` resource is set to be the same for all method paths, if you require different settings for each method, set the count parameter, replace `"*/*"` with `"${aws_api_gateway_resource.resource[count.index].path_part}/${aws_api_gateway_method.method[count.index].http_method}"` and configure as desired.
+
+### Data Sources
+* This configuration works on the premise that you have some existing infrastructure already, namely: VPC, Subnets, NLB and a frontend security group. In order to pass this configuration terraform state information from external infrastructure, modify the parameters in `data_sources.tf`.
